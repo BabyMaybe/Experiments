@@ -48,7 +48,7 @@ function AlignWithHero () {
 	var alignment : int;
 	alignment = hero.GetComponent(BlockMovement).direction;
 	transform.eulerAngles.y = alignment;
-	
+	//transform.Rotate(Vector3.zero);
 
 }
 

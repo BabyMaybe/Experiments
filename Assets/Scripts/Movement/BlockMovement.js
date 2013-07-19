@@ -29,21 +29,22 @@ function Look (dir : Vector3) {
 	var hit : RaycastHit;
 	
 	if (Physics.Raycast(ray,hit,1)) {
+		print("something Ahead!");
 	
 		if (hit.collider.tag == "Impassible") {
-			//print("something in the way");
+			print("something solid in the way");
 				
 			hit.transform.gameObject.SendMessage("Activate",SendMessageOptions.DontRequireReceiver);		
 			
-		if (Physics.Raycast(ray,hit,1)) {		
+			if (Physics.Raycast(ray,hit,1)) {
+				print ("activating had no effect. object still there");		
 		
-		return false;
+				return false;
 		
 			}	
 			
 		}
-			
-	
+				
 	}
 	//print("all clear");
 	return true;
@@ -56,38 +57,50 @@ function GetDirection () {
 	if (canMove && Input.anyKeyDown) {
 				
 		if (Input.inputString == up) {
-
-				if (Look(Vector3.forward)) {
-					transform.eulerAngles.y = 0;
-					transform.Translate(Vector3.forward);
-					direction = Facing.Up;
-				} 
-			}
+		
+			transform.eulerAngles.y = 0;
+			direction = Facing.Up;
+				
+			if (Look(Vector3.forward)) {
+					
+				transform.Translate(Vector3.forward);
+					
+			} 
+		}
 			
 		if (Input.inputString == down) {
+		
+			transform.eulerAngles.y = 180;
+			direction = Facing.Down;
 
-				if (Look(Vector3.back)) {
-					transform.eulerAngles.y = 180;
-					transform.Translate(Vector3.forward);
-					direction = Facing.Down;
-				} 
-			}
+			if (Look(Vector3.forward)) {
+					
+				transform.Translate(Vector3.forward);
+					
+			} 
+		}
 			
 		if (Input.inputString == left) {
+		
+			transform.eulerAngles.y = -90;
+			direction = Facing.Left;
 
-				if (Look(Vector3.left)) {
-					transform.eulerAngles.y = -90;
-					transform.Translate(Vector3.forward);
-					direction = Facing.Left;
-				} 
-			}
+			if (Look(Vector3.forward)) {
+				
+				transform.Translate(Vector3.forward);
+					
+			} 
+		}
 			
 		if (Input.inputString == right) {
+		
+			transform.eulerAngles.y = 90;
+			direction = Facing.Right;
 
-				if (Look(Vector3.right)) {
-					transform.eulerAngles.y = 90;
+				if (Look(Vector3.forward)) {
+					
 					transform.Translate(Vector3.forward);
-					direction = Facing.Right;
+					
 				} 
 			}			
 		}
