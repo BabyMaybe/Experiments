@@ -22,17 +22,21 @@ function Water() {
 
 function Conveyer() {
 
-	print("Wheeeeee!!!");
+	//print("Wheeeeee!!!");
 	Invoke("Move",.1);
 
 }
 
 function Ice() {
 	
-	GetComponent(BlockMovement).canMove = false;
+	//StopMove();
 	Invoke("Move",.1);
-	Invoke("StartMove",.2);
+	
 
+}
+
+function IceExit() {
+	
 }
 
 function StopMove() {

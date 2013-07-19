@@ -30,6 +30,10 @@ function Ice() {
 
 }
 
+function IceExit(){
+
+}
+
 function Move() {
 
 	transform.Translate(Vector3.forward);

@@ -5,6 +5,9 @@ var down : String = "o";
 var left : String = "a";
 var right : String = "e";
 
+var currentBlock : String;
+var previousBlock : String;
+
 var canMove : boolean = true;
 enum Facing {Up = 0, Down = 180, Left = 270, Right = 90};
 var direction : Facing;
@@ -13,7 +16,8 @@ function Start () {
 }
 
 function Update () {
-	
+
+	GetCurrentBlock();
 	GetDirection();
 	
 }
@@ -25,6 +29,7 @@ function Look (dir : Vector3) {
 	var hit : RaycastHit;
 	
 	if (Physics.Raycast(ray,hit,1)) {
+	
 		if (hit.collider.tag == "Impassible") {
 			//print("something in the way");
 				
@@ -34,9 +39,9 @@ function Look (dir : Vector3) {
 		
 		return false;
 		
-		}	
+			}	
 			
-	}
+		}
 			
 	
 	}
@@ -88,3 +93,64 @@ function GetDirection () {
 		}
 }
 
+function OnTriggerExit() {
+
+	//currentBlock = "Floor";
+	
+	
+	//print(currentBlock);
+	//print(canMove);
+	
+}
+
+function GetCurrentBlock() {
+
+	var ray : Ray = new Ray (transform.position,transform.TransformDirection (Vector3.down));
+	var hit : RaycastHit;
+	
+	if (Physics.Raycast(ray,hit,1)) {
+	
+		currentBlock = hit.collider.name;
+		print(currentBlock);
+	
+	}
+	
+	GetRestrictions();
+	
+}
+
+function OnTriggerEnter(other : Collider) {
+	
+	
+	
+	currentBlock = other.name;
+	//print(currentBlock);
+		//GetRestrictions();
+	//print(canMove);
+}
+
+
+
+function GetRestrictions() {
+
+	
+
+	if (currentBlock == "Ice" || "Ice Corner") {
+	
+		canMove = false;
+		
+	}
+	
+	if (currentBlock == "Conveyer") {
+		
+		canMove = false;
+	
+	}
+	
+	if (currentBlock == "Floor") {
+		
+		canMove = true;
+		
+	}
+	
+}
